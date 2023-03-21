@@ -98,7 +98,8 @@ class Allem:
                         if bullet.ppoos.y > self.pos.y:
                             bullet.alive = False
                             self.alive = False
-                            return 1
+                            global score
+                            score += 1
 
 bullet = Bullet(pos.x,pos.y)
 
@@ -168,6 +169,15 @@ while running:
         if allien.pos.y >700:
             allien.alive = False
 
+    temp = 0
+    for enemy in anemyList:
+        if enemy.alive == False:
+            temp += 1
+        if temp == len(anemyList):
+            running = False
+            print("you won!")
+            print("you killed",score,"aliens") 
+
     for missile in missiles:
         if missile.alive:
             for wall in wolllist:
@@ -187,9 +197,6 @@ while running:
     if sheild < 1:
         print("you lose!")
         running = False
-        for alien in anemyList:
-            if alien.alive == False:
-                score += 1
         print("you killed",score,"aliens")
 
     if bullet.alive == True:
